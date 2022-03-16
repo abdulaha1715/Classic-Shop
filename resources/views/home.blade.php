@@ -83,6 +83,18 @@ https://templatemo.com/tm-558-klassy-cafe
                             </li>
                             <!-- <li class=""><a rel="sponsored" href="https://templatemo.com" target="_blank">External URL</a></li> -->
                             <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li>
+
+                            @if (Route::has('login'))
+                                @auth
+                                    <li><x-app-layout></x-app-layout></li>
+                                @else
+                                    <li><a href="{{ route('login') }}" class="">Log in</a></li>
+
+                                    @if (Route::has('register'))
+                                        <li><a href="{{ route('register') }}" class="">Register</a></li>
+                                    @endif
+                                @endauth
+                            @endif
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
