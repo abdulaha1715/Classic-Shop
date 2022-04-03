@@ -24,5 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('site-url');
 
+Route::get('/admin-dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard');
+
 // Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware('auth', 'verified');
 
