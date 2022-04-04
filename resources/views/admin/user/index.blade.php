@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Admin Dashboard
+    All Users
 @endsection
 @section('admin-content')
     <div class="container-scroller">
@@ -714,4 +714,3 @@
     </div>
     <!-- container-scroller -->
 @endsection
-
