@@ -10708,6 +10708,24 @@ textarea.is-invalid.tt-hint {
     margin-bottom: 6px;
 }
 
+.formLabel {
+  margin-bottom: 0.25rem;
+  display: block;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+.formInput {
+  width: 100%;
+  border-radius: 0.125rem;
+}
+
+textarea#description,
+input.formInput {
+    color: #222;
+}
+
 .nav-tabs {
   border-bottom: 1px solid #2c2e33; }
   .nav-tabs .nav-link {

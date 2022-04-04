@@ -25,6 +25,21 @@
             </a>
           </li>
           <li class="nav-item menu-items">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-food" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Food Menu</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-food">
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('food-menu') }}">All Foods</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('create-food') }}">Create Foods</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>

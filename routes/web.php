@@ -31,8 +31,13 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/', [AdminController::class, 'adminHome'])->name('admin-dashboard');
     Route::get('/all-users', [AdminController::class, 'allUsers'])->name('all-users');
     
-    Route::get('/edit-user/{id}', [AdminController::class, 'edit_user'])->name('edit-user');
-    Route::get('/delete-user/{id}', [AdminController::class, 'delete_user'])->name('delete-user');
+    Route::get('/edit-user/{id}', [AdminController::class, 'editUser'])->name('edit-user');
+    Route::get('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('delete-user');
+    
+    
+    Route::get('/food-menu', [AdminController::class, 'foodMenu'])->name('food-menu');
+    Route::get('/create-food', [AdminController::class, 'createFood'])->name('create-food');
+    Route::post('/food-store', [AdminController::class, 'foodStore'])->name('new-food-store');
 });
 
 
