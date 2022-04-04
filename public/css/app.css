@@ -551,6 +551,15 @@ select {
   outline: 1px auto -webkit-focus-ring-color;
 }
 
+.header-area .main-nav .logo {
+    margin-top: 22px;
+}
+
+a.sidebar-brand.brand-logo {
+    color: #fff !important;
+    font-size: 36px !important;
+}
+
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
