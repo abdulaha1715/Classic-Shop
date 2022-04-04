@@ -27,13 +27,12 @@ Route::get('/dashboard', function () {
 Route::get('/', [HomeController::class, 'index'])->name('site-url');
 
 // Back-End Routes
-
 Route::prefix('dashboard')->group(function () {
-    // Route::get('/users', function () {
-    //     // Matches The "/admin/users" URL
-    // });
     Route::get('/', [AdminController::class, 'adminHome'])->name('admin-dashboard');
     Route::get('/all-users', [AdminController::class, 'allUsers'])->name('all-users');
+    
+    Route::get('/edit-user/{id}', [AdminController::class, 'edit_user'])->name('edit-user');
+    Route::get('/delete-user/{id}', [AdminController::class, 'delete_user'])->name('delete-user');
 });
 
 
