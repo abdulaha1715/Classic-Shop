@@ -10640,7 +10640,7 @@ textarea.is-invalid.tt-hint {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .fc .btn-group-vertical > button,
   .ajax-upload-dragdrop .btn-group-vertical > .ajax-file-upload,
@@ -10684,7 +10684,8 @@ textarea.is-invalid.tt-hint {
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;
-  list-style: none; }
+  list-style: none;
+}
 
 .nav-link {
   display: block;
@@ -10700,7 +10701,30 @@ textarea.is-invalid.tt-hint {
   .nav-link.disabled {
     color: #6c757d;
     pointer-events: none;
-    cursor: default; }
+    cursor: default;
+}
+
+.sidebar-offcanvas li.nav-item {
+    margin-bottom: 6px;
+}
+
+.formLabel {
+  margin-bottom: 0.25rem;
+  display: block;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+.formInput {
+  width: 100%;
+  border-radius: 0.125rem;
+}
+
+textarea#description,
+input.formInput {
+    color: #222;
+}
 
 .nav-tabs {
   border-bottom: 1px solid #2c2e33; }
