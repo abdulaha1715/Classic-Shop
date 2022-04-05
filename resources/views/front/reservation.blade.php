@@ -39,21 +39,33 @@
                               <fieldset>
                                 <input name="name" type="text" id="name" placeholder="Your Name*" required="">
                               </fieldset>
+                                @error('name')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-lg-6 col-sm-12">
                               <fieldset>
                               <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="">
                             </fieldset>
+                                @error('email')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-lg-6 col-sm-12">
                               <fieldset>
                                 <input name="phone" type="text" id="phone" placeholder="Phone Number*" required="">
                               </fieldset>
+                                @error('phone')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-md-6 col-sm-12">
                               <fieldset>
                                 <input name="guests" type="text" id="number-guests" placeholder="Number Of Guests*" required="">
                               </fieldset>
+                                @error('guests')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-lg-6">
                                 <div id="filterDate2">
@@ -64,16 +76,25 @@
                                     </div>
                                   </div>
                                 </div>
+                                @error('date')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-md-6 col-sm-12">
                               <fieldset>
                                 <input  name="time" id="time" type="time" class="form-control" placeholder="">
                               </fieldset>
+                                @error('time')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-lg-12">
                               <fieldset>
                                 <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
                               </fieldset>
+                                @error('message')
+                                    <p class="error-message">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-lg-12">
                               <fieldset>

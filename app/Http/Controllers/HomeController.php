@@ -31,13 +31,15 @@ class HomeController extends Controller
 
         $request->validate([
             'name'    => ['required', 'max:255', 'string'],
-            'phone'   => ['required', 'integer'],
+            'phone'   => ['required', 'string'],
             'email'   => ['required', 'max:255', 'string'],
             'guests'  => ['required', 'max:255', 'string'],
             'date'    => ['required', 'max:255', 'string'],
             'time'    => ['required', 'max:255', 'string'],
             'message' => ['required', 'string'],
         ]);
+
+        // dd($request->all());
 
         try {
             Reservation::create([
@@ -49,6 +51,8 @@ class HomeController extends Controller
                 'time'    => $request->time,
                 'message' => $request->message,
             ]);
+
+
 
             return redirect()->route('site-url')->with('success', "Reservation Create Successfully!");
         } catch (\Throwable $th) {

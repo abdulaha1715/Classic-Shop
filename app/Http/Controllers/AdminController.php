@@ -75,7 +75,10 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updateFood(Request $request, Food $food) {
+    public function updateFood(Request $request, $id) {
+
+        $food = Food::find($id);
+
         $request->validate([
             'name'        => ['required', 'max:255', 'string'],
             'price'       => ['required', 'integer'],

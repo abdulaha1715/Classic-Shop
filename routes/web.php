@@ -28,7 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('site-url');
 Route::post('/reservation', [HomeController::class, 'reservation'])->name('reservation');
 
 // Back-End Routes
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'adminHome'])->name('admin-dashboard');
     Route::get('/all-users', [AdminController::class, 'allUsers'])->name('all-users');
 
@@ -39,7 +39,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/create-food', [AdminController::class, 'createFood'])->name('create-food');
     Route::post('/food-store', [AdminController::class, 'foodStore'])->name('new-food-store');
     Route::get('/edit-food/{id}', [AdminController::class, 'editFood'])->name('edit-food');
-    Route::put('/update-food/{food}', [AdminController::class, 'updateFood'])->name('update-food');
+    Route::put('/update-food/{id}', [AdminController::class, 'updateFood'])->name('update-food');
     Route::get('/delete-food/{id}', [AdminController::class, 'deleteFood'])->name('delete-food');
 
     Route::get('/view-reservation', [AdminController::class, 'viewReservation'])->name('view-reservation');
