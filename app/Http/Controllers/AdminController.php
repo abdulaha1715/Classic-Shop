@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\User;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -27,8 +28,6 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', "User successfully Delete!");
     }
-
-
 
     public function foodMenu() {
         return view('admin.food.index')->with([
@@ -93,7 +92,7 @@ class AdminController extends Controller
                 $request->file('foodimage')->storeAs('public/uploads', $foodimage);
             }
 
-            Food::find($food->id)->update([
+            $food->update([
                 'name'        => $request->name,
                 'price'       => $request->price,
                 'foodimage'   => $foodimage,
@@ -112,6 +111,23 @@ class AdminController extends Controller
         $food->delete();
 
         return redirect()->back()->with('success', "Food successfully Delete!");
+    }
+
+    public function viewReservation() {
+        return view('admin.reservation.index')->with([
+            'reservations'   => Reservation::latest()->paginate(10),
+        ]);
+    }
+
+    public function approvedReservation() {
+        return view('admin.reservation.index');
+    }
+
+    public function deleteReservation($id) {
+        $reservation = Reservation::find($id);
+        $reservation->delete();
+
+        return redirect()->back()->with('success', "Reservation successfully Delete!");
     }
 
 }
