@@ -6,6 +6,7 @@ use App\Models\Food;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function delete_user($id) {
+    public function deleteUser($id) {
         $user = User::find($id);
         $user->delete();
 
@@ -42,7 +43,7 @@ class AdminController extends Controller
     public function foodStore(Request $request) {
 
         $request->validate([
-            'name'       => ['required', 'max:255', 'string'],
+            'name'        => ['required', 'max:255', 'string'],
             'price'       => ['required', 'integer'],
             'foodimage'   => ['image'],
             'description' => ['required', 'string'],
@@ -62,9 +63,46 @@ class AdminController extends Controller
                 'description' => $request->description,
             ]);
 
-            return redirect()->route('admin.food.index')->with('success', "Food Added Successfully!");
+            return redirect()->route('food-menu')->with('success', "Food Added Successfully!");
         } catch (\Throwable $th) {
-            return redirect()->route('admin.food.index')->with('error', $th->getMessage());
+            return redirect()->route('food-menu')->with('error', $th->getMessage());
+        }
+
+    }
+
+    public function editFood($id) {
+        return view('admin.food.edit')->with([
+            'food'   => Food::find($id),
+        ]);
+    }
+
+    public function updateFood(Request $request, Food $food) {
+        $request->validate([
+            'name'        => ['required', 'max:255', 'string'],
+            'price'       => ['required', 'integer'],
+            'foodimage'   => ['image'],
+            'description' => ['required', 'string'],
+        ]);
+
+        try {
+            $foodimage = $food->foodimage;
+
+            if ( !empty($request->file('foodimage')) ) {
+                Storage::delete('public/uploads/'.$foodimage);
+                $foodimage = time() . '-' . $request->file('foodimage')->getClientOriginalName();
+                $request->file('foodimage')->storeAs('public/uploads', $foodimage);
+            }
+
+            Food::find($food->id)->update([
+                'name'        => $request->name,
+                'price'       => $request->price,
+                'foodimage'   => $foodimage,
+                'description' => $request->description,
+            ]);
+
+            return redirect()->route('food-menu')->with('success', "Food Updated!");
+        } catch (\Throwable $th) {
+            return redirect()->route('food-menu')->with('error', $th->getMessage());
         }
 
     }

@@ -34,11 +34,11 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/edit-user/{id}', [AdminController::class, 'editUser'])->name('edit-user');
     Route::get('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('delete-user');
 
-
     Route::get('/food-menu', [AdminController::class, 'foodMenu'])->name('food-menu');
     Route::get('/create-food', [AdminController::class, 'createFood'])->name('create-food');
     Route::post('/food-store', [AdminController::class, 'foodStore'])->name('new-food-store');
     Route::get('/edit-food/{id}', [AdminController::class, 'editFood'])->name('edit-food');
+    Route::put('/update-food/{id}', [AdminController::class, 'updateFood'])->name('update-food');
     Route::get('/delete-food/{id}', [AdminController::class, 'deleteFood'])->name('delete-food');
 });
 
