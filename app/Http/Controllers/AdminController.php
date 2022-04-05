@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    
+
     public function adminHome() {
         return view('admin.admindashboard');
     }
-    
+
     public function allUsers() {
         return view('admin.user.index')->with([
             'users'   => User::latest()->paginate(10),
@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function delete_user($id) {
         $user = User::find($id);
         $user->delete();
-        
+
         return redirect()->back()->with('success', "User successfully Delete!");
     }
 
@@ -31,14 +31,12 @@ class AdminController extends Controller
 
     public function foodMenu() {
         return view('admin.food.index')->with([
-            'users'   => User::latest()->paginate(10),
+            'foods'   => Food::latest()->paginate(10),
         ]);
     }
 
     public function createFood() {
-        return view('admin.food.create')->with([
-            'users'   => User::latest()->paginate(10),
-        ]);
+        return view('admin.food.create');
     }
 
     public function foodStore(Request $request) {
@@ -49,8 +47,6 @@ class AdminController extends Controller
             'foodimage'   => ['image'],
             'description' => ['required', 'string'],
         ]);
-
-        // dd($request);
 
         try {
             $foodimage = null;
@@ -66,13 +62,18 @@ class AdminController extends Controller
                 'description' => $request->description,
             ]);
 
-            return redirect()->route('admin-dashboard')->with('success', "Food Added Successfully!");
+            return redirect()->route('admin.food.index')->with('success', "Food Added Successfully!");
         } catch (\Throwable $th) {
-            return redirect()->route('admin-dashboard')->with('error', $th->getMessage());
+            return redirect()->route('admin.food.index')->with('error', $th->getMessage());
         }
 
+    }
 
+    public function deleteFood($id) {
+        $food = Food::find($id);
+        $food->delete();
 
+        return redirect()->back()->with('success', "Food successfully Delete!");
     }
 
 }

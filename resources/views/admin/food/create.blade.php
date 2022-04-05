@@ -8,7 +8,7 @@
         <div class="content-wrapper">
             <div>
                 <div class="flex justify-between">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight add-class">
+                    <h2 class="font-semibold text-xl leading-tight add-class text-white">
                         {{ __('Add New Food') }}
                     </h2>
                     <a href="{{ route('food-menu') }}" class="border border-emerald-400 px-3 py-1">Back</a>
