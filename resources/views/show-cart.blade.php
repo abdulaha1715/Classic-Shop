@@ -142,6 +142,11 @@ https://templatemo.com/tm-558-klassy-cafe
                                 </div>
                             @endif
 
+
+
+                            <form action="{{ route('order-confirm') }}" method="POST">
+                                @csrf
+
                             <table class="w-full border-collapse">
                                 <thead>
                                     <tr class="text-center">
@@ -163,6 +168,7 @@ https://templatemo.com/tm-558-klassy-cafe
                                         }
                                     @endphp
 
+
                                     @foreach ($carts as $cart)
                                         <tr>
                                             <td class="border py-2 px-1 w-8 text-center">
@@ -172,12 +178,15 @@ https://templatemo.com/tm-558-klassy-cafe
                                                 <img src="{{ getImageUrl($cart->foodimage) }}" class="mx-auto rounded w-20 h-20" alt="">
                                             </td>
                                             <td class="border py-2 px-1 text-center text-capitalize">
+                                                <input type="text" name="name[]" class="formInput" value="{{ $cart->name }}" hidden>
                                                 {{ $cart->name }}
                                             </td>
                                             <td class="border py-2 px-1 text-center font-bold">
+                                                <input type="text" name="price[]" class="formInput" value="{{ $cart->price }}" hidden>
                                                 ${{ $cart->price }}
                                             </td>
                                             <td class="border py-2 px-1 text-center">
+                                                <input type="text" name="quantity[]" class="formInput" value="{{ $cart->quantity }}" hidden>
                                                 {{ $cart->quantity }}
                                             </td>
                                             <td class="border py-2 px-1 text-center">
@@ -192,26 +201,26 @@ https://templatemo.com/tm-558-klassy-cafe
                                 </tbody>
                             </table>
                             <div class="text-center mt-4">
-                                <button id="order-form" class="btn btn-primary">Order Now</button>
+                                <button id="order-form" type="button" class="btn btn-primary">Order Now</button>
                             </div>
 
                             <div class="order-form" id="apper" style="max-width: 480px; margin: 0 auto; display: none;">
 
                                 <div class="mt-6">
                                     <div class="mt-4 flex justify-between">
-                                        <label for="name" class="formLabel">Name:</label>
-                                        <input type="text" name="name" class="formInput" value="{{ old('name') }}">
+                                        <label for="ordername" class="formLabel">Name:</label>
+                                        <input type="text" name="ordername" class="formInput" value="{{ old('ordername') }}">
 
-                                        @error('name')
+                                        @error('ordername')
                                             <p class="text-red-700 text-sm">{{ $message }}</p>
                                         @enderror
                                     </div>
 
                                     <div class="mt-4 flex justify-between">
-                                        <label for="price" class="formLabel">phone:</label>
-                                        <input type="text" name="price" class="formInput" value="{{ old('price') }}">
+                                        <label for="phone" class="formLabel">phone:</label>
+                                        <input type="text" name="phone" class="formInput" value="{{ old('phone') }}">
 
-                                        @error('price')
+                                        @error('phone')
                                             <p class="text-red-700 text-sm">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -227,11 +236,14 @@ https://templatemo.com/tm-558-klassy-cafe
 
                                     <div class="mt-6 flex justify-center">
                                         <button type="submit" class="px-8 py-2 mx-1 text-base uppercase bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-all">Confirm Order</button>
-                                        <button id="close" class="btn btn-danger mx-1">Close</button>
+                                        <button id="close" type="button" class="btn btn-danger mx-1">Close</button>
                                     </div>
 
                                 </div>
                             </div>
+
+
+                                </form>
                         </div>
                     </div>
                 </div>

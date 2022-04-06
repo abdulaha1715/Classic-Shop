@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\Foodcart;
 use App\Models\Foodchef;
+use App\Models\Order;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class HomeController extends Controller
             return redirect()->route('admin-dashboard');
         } else {
             $user_id = Auth::id();
-            $count   = Foodcart::where('user_id', $user_id)->count();
+            $count   = Foodcart::where('user_id', $user_id)->sum('quantity');
             return view('home')->with([
                 'foods'   => Food::all(),
                 'chefs'   => Foodchef::all(),
@@ -91,8 +92,10 @@ class HomeController extends Controller
 
     public function showCart(Request $request, $id) {
         $user_id = Auth::id();
-        $count   = Foodcart::where('user_id', $user_id)->count();
+            $count   = Foodcart::where('user_id', $user_id)->sum('quantity');
+
         $cart    = Foodcart::where('user_id', $user_id)->join('food', 'foodcarts.food_id', "=", 'food.id')->get();
+
         return view('show-cart')->with([
             'count'   => $count,
             'carts'   => $cart,
@@ -104,5 +107,22 @@ class HomeController extends Controller
         $cart->delete();
 
         return redirect()->back()->with('success', "Cart item successfully Removed!");
+    }
+
+    public function orderConfirm(Request $request) {
+        // dd($request->all());
+        foreach ($request->name as $key => $foodname) {
+            $oderData = new Order;
+            $oderData->foodname = $foodname;
+            $oderData->price    = $request->price[$key];
+            $oderData->quantity = $request->quantity[$key];
+            $oderData->name     = $request->ordername;
+            $oderData->phone    = $request->phone;
+            $oderData->address  = $request->address;
+
+            $oderData->save();
+        }
+
+        return redirect()->back()->with('success', "Your order is taken!");
     }
 }
