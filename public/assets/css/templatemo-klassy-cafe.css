@@ -1711,3 +1711,11 @@ label.formLabel {
 input.formInput {
     width: 70%;
 }
+
+button#order-form {
+    background-color: #007bff;
+}
+
+button#close {
+    background-color: #c82333;
+}

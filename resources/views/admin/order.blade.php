@@ -8,6 +8,20 @@
     <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
+            <div>
+                <div class="flex justify-between">
+                    <h2 class="font-semibold text-xl leading-tight add-class text-white">
+                        {{ __('All Orders') }}
+                    </h2>
+                    <div class="search">
+                        <form action="{{ route('search-order')}}" method="POST">
+                        @csrf
+                            <input type="text" placeholder="Search here..." name="search" class="search text-cyan-900 p-2" id="">
+                            <input type="submit" value="Search" class="btn btn-success p-2">
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="py-12">
                 <div class="mx-auto sm:px-6 lg:px-8">
                     <div class="overflow-hidden shadow-sm sm:rounded-lg">
