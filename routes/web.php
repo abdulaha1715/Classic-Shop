@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 // Front-End Routes
 Route::get('/', [HomeController::class, 'index'])->name('site-url');
 Route::post('/reservation', [HomeController::class, 'reservation'])->name('reservation');
+Route::post('/food-add-to-cart/{id}', [HomeController::class, 'foodCart'])->name('food-cart');
 
 // Back-End Routes
 Route::prefix('dashboard')->middleware('auth')->group(function () {

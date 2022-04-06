@@ -1675,3 +1675,29 @@ p.error-message {
     color: red !important;
     font-size: 12px;
 }
+
+.food-add-cart {padding: 8px;display: flex;justify-content: space-between;}
+
+.food-add-cart button {
+    background: transparent;
+    border: 1px solid #222;
+    padding: 0 8px;
+}
+
+li.scroll-to-section {
+    position: relative;
+}
+
+span.lea-cart-num {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    background: #FB6355;
+    font-size: 80%;
+    border-radius: 50%;
+    top: -6px;
+    right: -6px;
+}

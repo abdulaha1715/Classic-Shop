@@ -112,6 +112,7 @@ class AdminController extends Controller
 
     public function deleteFood($id) {
         $food = Food::find($id);
+        Storage::delete('public/uploads/'.$food->foodimage);
         $food->delete();
 
         return redirect()->back()->with('success', "Food successfully Delete!");
@@ -222,6 +223,7 @@ class AdminController extends Controller
 
     public function deleteChef($id) {
         $chef = Foodchef::find($id);
+        Storage::delete('public/uploads/'.$chef->chefimage);
         $chef->delete();
 
         return redirect()->back()->with('success', "Chef successfully Delete!");

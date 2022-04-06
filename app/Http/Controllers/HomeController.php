@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\Foodcart;
 use App\Models\Foodchef;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -22,9 +23,12 @@ class HomeController extends Controller
         if ($usertype == 'admin') {
             return redirect()->route('admin-dashboard');
         } else {
+            $user_id = Auth::id();
+            $count = Foodcart::where('user_id', $user_id)->count();
             return view('home')->with([
                 'foods'   => Food::all(),
                 'chefs'   => Foodchef::all(),
+                'count'   => $count,
             ]);
         }
     }
@@ -41,8 +45,6 @@ class HomeController extends Controller
             'message' => ['required', 'string'],
         ]);
 
-        // dd($request->all());
-
         try {
             Reservation::create([
                 'name'    => $request->name,
@@ -54,11 +56,35 @@ class HomeController extends Controller
                 'message' => $request->message,
             ]);
 
-
-
             return redirect()->route('site-url')->with('success', "Reservation Create Successfully!");
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
+        }
+
+    }
+
+    public function foodCart(Request $request, $id) {
+        if (Auth::id()) {
+            $user_id = Auth::id();
+            $food_id = $id;
+
+            $request->validate([
+                'quantity' => ['required', 'max:255', 'string'],
+            ]);
+
+            try {
+                Foodcart::create([
+                    'user_id'  => $user_id,
+                    'food_id'  => $food_id,
+                    'quantity' => $request->quantity,
+                ]);
+
+                return redirect()->back()->with('success', "Food add to cart Successfully!");
+            } catch (\Throwable $th) {
+                return redirect()->back()->with('error', $th->getMessage());
+            }
+        } else {
+            return redirect('/login');
         }
 
     }
