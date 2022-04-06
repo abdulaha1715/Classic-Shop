@@ -191,6 +191,47 @@ https://templatemo.com/tm-558-klassy-cafe
 
                                 </tbody>
                             </table>
+                            <div class="text-center mt-4">
+                                <button id="order-form" class="btn btn-primary">Order Now</button>
+                            </div>
+
+                            <div class="order-form" id="apper" style="max-width: 480px; margin: 0 auto; display: none;">
+
+                                <div class="mt-6">
+                                    <div class="mt-4 flex justify-between">
+                                        <label for="name" class="formLabel">Name:</label>
+                                        <input type="text" name="name" class="formInput" value="{{ old('name') }}">
+
+                                        @error('name')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mt-4 flex justify-between">
+                                        <label for="price" class="formLabel">phone:</label>
+                                        <input type="text" name="price" class="formInput" value="{{ old('price') }}">
+
+                                        @error('price')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mt-4 flex justify-between">
+                                        <label for="address" class="formLabel">Addess:</label>
+                                        <textarea name="address" id="address" cols="35" rows="5"></textarea>
+
+                                        @error('address')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mt-6 flex justify-center">
+                                        <button type="submit" class="px-8 py-2 mx-1 text-base uppercase bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-all">Confirm Order</button>
+                                        <button id="close" class="btn btn-danger mx-1">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,6 +288,16 @@ https://templatemo.com/tm-558-klassy-cafe
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/lightbox.js') }}"></script>
     <script src="{{ asset('assets/js/isotope.js') }}"></script>
+
+    <script>
+        $("#order-form").click(function() {
+            $("#apper").show();
+        })
+
+        $("#close").click(function() {
+            $("#apper").hide();
+        })
+    </script>
 
     <!-- Global Init -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>

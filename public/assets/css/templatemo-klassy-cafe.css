@@ -1701,3 +1701,13 @@ span.lea-cart-num {
     top: -6px;
     right: -6px;
 }
+
+label.formLabel {
+    font-size: 21px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+input.formInput {
+    width: 70%;
+}
