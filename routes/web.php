@@ -42,6 +42,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::put('/update-food/{id}', [AdminController::class, 'updateFood'])->name('update-food');
     Route::get('/delete-food/{id}', [AdminController::class, 'deleteFood'])->name('delete-food');
 
+
+
+    Route::get('/chefs', [AdminController::class, 'allChefs'])->name('chefs');
+    Route::get('/create-chef', [AdminController::class, 'createChef'])->name('create-chef');
+    Route::post('/chef-store', [AdminController::class, 'chefStore'])->name('new-chef-store');
+    Route::get('/edit-chef/{id}', [AdminController::class, 'editChef'])->name('edit-chef');
+    Route::put('/update-chef/{id}', [AdminController::class, 'updateChef'])->name('update-chef');
+    Route::get('/delete-chef/{id}', [AdminController::class, 'deleteChef'])->name('delete-chef');
+
     Route::get('/view-reservation', [AdminController::class, 'viewReservation'])->name('view-reservation');
     Route::get('/approved-reservation/{id}', [AdminController::class, 'approvedReservation'])->name('approved-reservation');
     Route::get('/delete-reservation/{id}', [AdminController::class, 'deleteReservation'])->name('delete-reservation');

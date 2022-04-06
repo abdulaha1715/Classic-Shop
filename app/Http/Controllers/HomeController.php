@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\Foodchef;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class HomeController extends Controller
         } else {
             return view('home')->with([
                 'foods'   => Food::all(),
+                'chefs'   => Foodchef::all(),
             ]);
         }
     }

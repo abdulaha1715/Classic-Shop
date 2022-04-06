@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\Foodchef;
 use App\Models\User;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -131,6 +132,49 @@ class AdminController extends Controller
         $reservation->delete();
 
         return redirect()->back()->with('success', "Reservation successfully Delete!");
+    }
+
+    public function allChefs() {
+        return view('admin.chef.index')->with([
+            'chefs'   => Foodchef::latest()->paginate(10),
+        ]);
+    }
+
+    public function createChef() {
+        return view('admin.chef.create');
+    }
+
+    public function chefStore(Request $request) {
+
+        $request->validate([
+            'name'           => ['required', 'max:255', 'string'],
+            'specialtie'     => ['required', 'max:255', 'string'],
+            'chefimage'      => ['image'],
+        ]);
+
+        try {
+            $chefimage = null;
+            if (!empty($request->file('chefimage'))) {
+                $chefimage = time() . '-' . $request->file('chefimage')->getClientOriginalName();
+                $request->file('chefimage')->storeAs('public/uploads', $chefimage);
+            }
+
+            Foodchef::create([
+                'name'           => $request->name,
+                'specialtie'     => $request->specialtie,
+                'chefimage'      => $chefimage,
+                'cheffacebook'   => $request->cheffacebook,
+                'cheftwitter'    => $request->cheftwitter,
+                'chefbehence'    => $request->chefbehence,
+                'chefinstagram'  => $request->chefinstagram,
+                'chefgoogleplus' => $request->chefgoogleplus,
+            ]);
+
+            return redirect()->route('chefs')->with('success', "Chef Added Successfully!");
+        } catch (\Throwable $th) {
+            return redirect()->route('chefs')->with('error', $th->getMessage());
+        }
+
     }
 
 }
