@@ -1719,3 +1719,7 @@ button#order-form {
 button#close {
     background-color: #c82333;
 }
+
+.header-area .main-nav .logo {
+    margin-top: 20px;
+}

@@ -15,30 +15,50 @@ class AdminController extends Controller
 {
 
     public function adminHome() {
-        return view('admin.admindashboard');
+        if (Auth::id()) {
+            return view('admin.admindashboard');
+        } else {
+            return redirect('login');
+        }
     }
 
     public function allUsers() {
-        return view('admin.user.index')->with([
-            'users'   => User::latest()->paginate(10),
-        ]);
+        if (Auth::id()) {
+            return view('admin.user.index')->with([
+                'users'   => User::latest()->paginate(10),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function deleteUser($id) {
-        $user = User::find($id);
-        $user->delete();
+        if (Auth::id()) {
+            $user = User::find($id);
+            $user->delete();
 
-        return redirect()->back()->with('success', "User successfully Delete!");
+            return redirect()->back()->with('success', "User successfully Delete!");
+        } else {
+            return redirect('login');
+        }
     }
 
     public function foodMenu() {
-        return view('admin.food.index')->with([
-            'foods'   => Food::latest()->paginate(10),
-        ]);
+        if (Auth::id()) {
+            return view('admin.food.index')->with([
+                'foods'   => Food::latest()->paginate(10),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function createFood() {
-        return view('admin.food.create');
+        if (Auth::id()) {
+            return view('admin.food.create');
+        } else {
+            return redirect('login');
+        }
     }
 
     public function foodStore(Request $request) {
@@ -72,9 +92,13 @@ class AdminController extends Controller
     }
 
     public function editFood($id) {
-        return view('admin.food.edit')->with([
-            'food'   => Food::find($id),
-        ]);
+        if (Auth::id()) {
+            return view('admin.food.edit')->with([
+                'food'   => Food::find($id),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function updateFood(Request $request, $id) {
@@ -112,21 +136,33 @@ class AdminController extends Controller
     }
 
     public function deleteFood($id) {
-        $food = Food::find($id);
-        Storage::delete('public/uploads/'.$food->foodimage);
-        $food->delete();
+        if (Auth::id()) {
+            $food = Food::find($id);
+            Storage::delete('public/uploads/'.$food->foodimage);
+            $food->delete();
 
-        return redirect()->back()->with('success', "Food successfully Delete!");
+            return redirect()->back()->with('success', "Food successfully Delete!");
+        } else {
+            return redirect('login');
+        }
     }
 
     public function viewReservation() {
-        return view('admin.reservation')->with([
-            'reservations'   => Reservation::latest()->paginate(10),
-        ]);
+        if (Auth::id()) {
+            return view('admin.reservation')->with([
+                'reservations'   => Reservation::latest()->paginate(10),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function approvedReservation() {
-        return view('admin.reservation.index');
+        if (Auth::id()) {
+            return view('admin.reservation.index');
+        } else {
+            return redirect('login');
+        }
     }
 
     public function deleteReservation($id) {
@@ -134,16 +170,27 @@ class AdminController extends Controller
         $reservation->delete();
 
         return redirect()->back()->with('success', "Reservation successfully Delete!");
+        } else {
+            return redirect('login');
+        }
     }
 
     public function allChefs() {
-        return view('admin.chef.index')->with([
-            'chefs'   => Foodchef::latest()->paginate(10),
-        ]);
+        if (Auth::id()) {
+            return view('admin.chef.index')->with([
+                'chefs'   => Foodchef::latest()->paginate(10),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function createChef() {
-        return view('admin.chef.create');
+        if (Auth::id()) {
+            return view('admin.chef.create');
+        } else {
+            return redirect('login');
+        }
     }
 
     public function chefStore(Request $request) {
@@ -180,9 +227,13 @@ class AdminController extends Controller
     }
 
     public function editChef($id) {
-        return view('admin.chef.edit')->with([
-            'chef'   => Foodchef::find($id),
-        ]);
+        if (Auth::id()) {
+            return view('admin.chef.edit')->with([
+                'chef'   => Foodchef::find($id),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function updateChef(Request $request, $id) {
@@ -223,25 +274,37 @@ class AdminController extends Controller
     }
 
     public function deleteChef($id) {
-        $chef = Foodchef::find($id);
-        Storage::delete('public/uploads/'.$chef->chefimage);
-        $chef->delete();
+        if (Auth::id()) {
+            $chef = Foodchef::find($id);
+            Storage::delete('public/uploads/'.$chef->chefimage);
+            $chef->delete();
 
-        return redirect()->back()->with('success', "Chef successfully Delete!");
+            return redirect()->back()->with('success', "Chef successfully Delete!");
+        } else {
+            return redirect('login');
+        }
     }
 
     public function viewOrder() {
-        return view('admin.order')->with([
-            'orders'   => Order::latest()->paginate(10),
-        ]);
+        if (Auth::id()) {
+            return view('admin.order')->with([
+                'orders'   => Order::latest()->paginate(10),
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
     public function searchOrder(Request $request) {
-        $search_request = $request->search;
-        $search=Order::where('name', 'Like', '%'.$search_request.'%')->orWhere('foodname', 'Like', '%'.$search_request.'%')->get();
-        return view('admin.order')->with([
-            'orders'   => $search,
-        ]);
+        if (Auth::id()) {
+            $search_request = $request->search;
+            $search=Order::where('name', 'Like', '%'.$search_request.'%')->orWhere('foodname', 'Like', '%'.$search_request.'%')->get();
+            return view('admin.order')->with([
+                'orders'   => $search,
+            ]);
+        } else {
+            return redirect('login');
+        }
     }
 
 }
