@@ -59,6 +59,12 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/approved-reservation/{id}', [AdminController::class, 'approvedReservation'])->name('approved-reservation');
     Route::get('/delete-reservation/{id}', [AdminController::class, 'deleteReservation'])->name('delete-reservation');
 
+
+    Route::get('/view-order', [AdminController::class, 'viewOrder'])->name('view-order');
+    Route::get('/approved-reservation/{id}', [AdminController::class, 'approvedReservation'])->name('approved-reservation');
+    Route::get('/delete-reservation/{id}', [AdminController::class, 'deleteReservation'])->name('delete-reservation');
+
+
 });
 
 

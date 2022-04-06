@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\Foodchef;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -119,7 +120,7 @@ class AdminController extends Controller
     }
 
     public function viewReservation() {
-        return view('admin.reservation.index')->with([
+        return view('admin.reservation')->with([
             'reservations'   => Reservation::latest()->paginate(10),
         ]);
     }
@@ -227,6 +228,12 @@ class AdminController extends Controller
         $chef->delete();
 
         return redirect()->back()->with('success', "Chef successfully Delete!");
+    }
+
+    public function viewOrder() {
+        return view('admin.order')->with([
+            'orders'   => Order::latest()->paginate(10),
+        ]);
     }
 
 }
