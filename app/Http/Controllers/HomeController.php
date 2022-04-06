@@ -98,4 +98,11 @@ class HomeController extends Controller
             'carts'   => $cart,
         ]);
     }
+
+    public function removeCart($id) {
+        $cart = Foodcart::find($id);
+        $cart->delete();
+
+        return redirect()->back()->with('success', "Cart item successfully Removed!");
+    }
 }
