@@ -166,10 +166,11 @@ class AdminController extends Controller
     }
 
     public function deleteReservation($id) {
-        $reservation = Reservation::find($id);
-        $reservation->delete();
+        if (Auth::id()) {
+            $reservation = Reservation::find($id);
+            $reservation->delete();
 
-        return redirect()->back()->with('success', "Reservation successfully Delete!");
+            return redirect()->back()->with('success', "Reservation successfully Delete!");
         } else {
             return redirect('login');
         }

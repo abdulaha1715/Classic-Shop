@@ -104,16 +104,17 @@ class HomeController extends Controller
         } else {
             return redirect()->back();
         }
-
-
-
     }
 
     public function removeCart($id) {
-        $cart = Foodcart::find($id);
-        $cart->delete();
+        if (Auth::id()) {
+            $cart = Foodcart::find($id);
+            $cart->delete();
 
-        return redirect()->back()->with('success', "Cart item successfully Removed!");
+            return redirect()->back()->with('success', "Cart item successfully Removed!");
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function orderConfirm(Request $request) {
