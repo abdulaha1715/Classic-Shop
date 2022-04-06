@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Edit Chef Info
+    Create Chef
 @endsection
 
 @section('admin-main-panel')
@@ -9,9 +9,9 @@
             <div>
                 <div class="flex justify-between">
                     <h2 class="font-semibold text-xl leading-tight add-class text-white">
-                        {{ __('Edit Chef Info') }}
+                        {{ __('Add New Chef') }}
                     </h2>
-                    <a href="{{ route('food-menu') }}" class="border border-emerald-400 px-3 py-1">Back</a>
+                    <a href="{{ route('chefs') }}" class="border border-emerald-400 px-3 py-1">Back</a>
                 </div>
             </div>
 
@@ -20,14 +20,14 @@
                     <div class="overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 border-b border-gray-200">
 
-                            <form action="{{ route('update-food', $food->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('update-chef', $chef->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="flex mt-6">
                                     <div class="flex-1 mr-4">
                                         <label for="name" class="formLabel">Name</label>
-                                        <input type="text" name="name" class="formInput" value="{{ $food->name }}">
+                                        <input type="text" name="name" class="formInput" value="{{ $chef->name }}">
 
                                         @error('name')
                                             <p class="text-red-700 text-sm">{{ $message }}</p>
@@ -35,10 +35,10 @@
                                     </div>
 
                                     <div class="flex-1 mr-4">
-                                        <label for="price" class="formLabel">Price</label>
-                                        <input type="number" name="price" class="formInput" value="{{ $food->price }}">
+                                        <label for="specialtie" class="formLabel">Specialtie</label>
+                                        <input type="text" name="specialtie" class="formInput" value="{{ $chef->specialtie }}">
 
-                                        @error('price')
+                                        @error('specialtie')
                                             <p class="text-red-700 text-sm">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -47,10 +47,10 @@
 
                                 <div class="flex mt-6 justify-between">
                                     <div class="flex-1 mx-5">
-                                        <label for="foodimage" class="formLabel">Food Image</label>
-                                        <label for="foodimage" class="formLabel border-2 rounded-md border-dashed border-emerald-700 py-4 text-center">Click
+                                        <label for="chefimage" class="formLabel">Chef Image</label>
+                                        <label for="chefimage" class="formLabel border-2 rounded-md border-dashed border-emerald-700 py-4 text-center">Click
                                             to upload image</label>
-                                        <input type="file" name="foodimage" id="foodimage" class="formInput hidden">
+                                        <input type="file" name="chefimage" id="chefimage" class="formInput hidden">
                                         @php
                                             function getImageUrl($image) {
                                                 if(str_starts_with($image, 'http')) {
@@ -61,9 +61,10 @@
                                         @endphp
 
                                         <div class="w-full">
-                                            <img src="{{ getImageUrl($food->foodimage) }}" class="m-4 rounded w-28 h-28" alt="">
+                                            <img src="{{ getImageUrl($chef->chefimage) }}" class="m-4 rounded w-28 h-28" alt="">
                                         </div>
-                                        @error('foodimage')
+
+                                        @error('chefimage')
                                             <p class="text-red-700 text-sm">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -71,13 +72,52 @@
 
                                 <div class="flex mt-6">
                                     <div class="flex-1 mr-4">
-                                        <label for="description" class="formLabel">Description</label>
-                                        <textarea name="description" id="description" class="formInput" rows="10">{{ $food->description }}</textarea>
+                                        <label for="cheffacebook" class="formLabel">Chef Facebook</label>
+                                        <input type="text" name="cheffacebook" class="formInput" value="{{ $chef->cheffacebook }}">
 
-                                        @error('description')
+                                        @error('cheffacebook')
                                             <p class="text-red-700 text-sm">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    <div class="flex-1 mr-4">
+                                        <label for="cheftwitter" class="formLabel">Chef Twitter</label>
+                                        <input type="text" name="cheftwitter" class="formInput" value="{{ $chef->cheftwitter }}">
+
+                                        @error('cheftwitter')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="flex-1 mr-4">
+                                        <label for="chefbehence" class="formLabel">Chef Behence</label>
+                                        <input type="text" name="chefbehence" class="formInput" value="{{ $chef->chefbehence }}">
+
+                                        @error('chefbehence')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="flex mt-6">
+                                    <div class="flex-1 mr-4">
+                                        <label for="chefinstagram" class="formLabel">Chef Instagram</label>
+                                        <input type="text" name="chefinstagram" class="formInput" value="{{ $chef->chefinstagram }}">
+
+                                        @error('chefinstagram')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="flex-1 mr-4">
+                                        <label for="chefgoogleplus" class="formLabel">Chef Google+</label>
+                                        <input type="text" name="chefgoogleplus" class="formInput" value="{{ $chef->chefgoogleplus }}">
+
+                                        @error('chefgoogleplus')
+                                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="flex-1 mr-4"></div>
                                 </div>
 
                                 <div class="mt-6">

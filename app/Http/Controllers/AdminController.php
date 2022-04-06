@@ -177,4 +177,54 @@ class AdminController extends Controller
 
     }
 
+    public function editChef($id) {
+        return view('admin.chef.edit')->with([
+            'chef'   => Foodchef::find($id),
+        ]);
+    }
+
+    public function updateChef(Request $request, $id) {
+
+        $chef = Foodchef::find($id);
+
+        $request->validate([
+            'name'           => ['required', 'max:255', 'string'],
+            'specialtie'     => ['required', 'max:255', 'string'],
+            'chefimage'      => ['image'],
+        ]);
+
+        try {
+            $chefimage = $chef->chefimage;
+
+            if ( !empty($request->file('chefimage')) ) {
+                Storage::delete('public/uploads/'.$chefimage);
+                $chefimage = time() . '-' . $request->file('chefimage')->getClientOriginalName();
+                $request->file('chefimage')->storeAs('public/uploads', $chefimage);
+            }
+
+            $chef->update([
+                'name'           => $request->name,
+                'specialtie'     => $request->specialtie,
+                'chefimage'      => $chefimage,
+                'cheffacebook'   => $request->cheffacebook,
+                'cheftwitter'    => $request->cheftwitter,
+                'chefbehence'    => $request->chefbehence,
+                'chefinstagram'  => $request->chefinstagram,
+                'chefgoogleplus' => $request->chefgoogleplus,
+            ]);
+
+            return redirect()->route('chefs')->with('success', "Chef Updated!");
+        } catch (\Throwable $th) {
+            return redirect()->route('chefs')->with('error', $th->getMessage());
+        }
+
+    }
+
+    public function deleteChef($id) {
+        $chef = Foodchef::find($id);
+        $chef->delete();
+
+        return redirect()->back()->with('success', "Chef successfully Delete!");
+    }
+
 }

@@ -66,7 +66,7 @@
                                                 {{ $chef->name }}
                                             </td>
                                             <td class="border py-2 px-1 text-center font-bold">
-                                                ${{ $chef->specialtie }}
+                                                {{ $chef->specialtie }}
                                             </td>
                                             <td class="border py-2 px-1 text-center">
                                                 {{ $chef->cheffacebook }}
